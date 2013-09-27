@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 29-mei-2013 13:24:19 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="flyaway" name="Model.Flight" table="flight">
+    <id name="id" type="int">
+      <column name="id"/>
+      <generator class="native"/>
+    </id>
+    <property name="number" type="java.lang.Integer">
+      <column name="flightnumber" not-null="true"/>
+    </property>
+    <many-to-one class="Model.Staff" fetch="select" name="pilot">
+      <column name="pilotNumber" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="Model.Staff" fetch="select" name="copilot">
+      <column name="copilotNumber" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="Model.Airport" fetch="select" name="destination">
+      <column name="airportIdDestination" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="Model.Airport" fetch="select" name="From">
+      <column name="airportIdFrom" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="Model.Plane" fetch="select" name="plane">
+      <column name="planeNumber" not-null="true"/>
+    </many-to-one>
+    <property name="date" type="date">
+      <column length="10" name="flyDate" not-null="true"/>
+    </property>
+    <set cascade="save-update" name="otherPersonal" table="flightstaff">
+      <key>
+        <column name="flight" not-null="true"/>
+      </key>
+      <many-to-many class="Model.Staff">
+        <column name="staff" not-null="true"/>
+      </many-to-many>
+    </set>
+    <set cascade="save-update" inverse="false" name="stops" table="flightstops">
+      <key>
+        <column name="flight" not-null="true"/>
+      </key>
+      <many-to-many class="Model.Airport">
+        <column length="5" name="airport" not-null="true"/>
+      </many-to-many>
+    </set>
+  </class>
+</hibernate-mapping>

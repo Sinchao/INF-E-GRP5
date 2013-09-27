@@ -1,0 +1,415 @@
+<?xml version="1.1" encoding="UTF-8" ?>
+
+<Form version="1.5" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
+  <Properties>
+    <Property name="closable" type="boolean" value="true"/>
+    <Property name="iconifiable" type="boolean" value="true"/>
+    <Property name="maximizable" type="boolean" value="true"/>
+    <Property name="resizable" type="boolean" value="true"/>
+    <Property name="name" type="java.lang.String" value="Form" noResource="true"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="2"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="jLabel5" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel4" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel3" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel1" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel8" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel2" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel7" alignment="1" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="txtFieldNumber" pref="236" max="32767" attributes="0"/>
+                          <Component id="txtFieldPilot" alignment="1" pref="236" max="32767" attributes="0"/>
+                          <Component id="txtFieldCoPilot" alignment="1" pref="236" max="32767" attributes="0"/>
+                          <Component id="txtFieldPlane" alignment="1" pref="236" max="32767" attributes="1"/>
+                          <Component id="txtPersonal" alignment="0" pref="236" max="32767" attributes="1"/>
+                          <Component id="txtFieldFrom" alignment="0" pref="236" max="32767" attributes="0"/>
+                          <Component id="txtFieldDestination" alignment="0" pref="236" max="32767" attributes="0"/>
+                          <Component id="txtFieldDate" alignment="1" pref="236" max="32767" attributes="0"/>
+                          <Component id="txtFieldStops" alignment="0" pref="236" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="141" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
+                      <Component id="btnSave" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnCancel" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+                      <Component id="lblError" pref="418" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" attributes="0">
+              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txtFieldNumber" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                          <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txtFieldDate" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txtFieldPilot" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtFieldCoPilot" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtFieldFrom" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtFieldDestination" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txtFieldStops" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txtFieldPlane" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtPersonal" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Component id="jScrollPane1" max="32767" attributes="1"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnSave" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnCancel" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="lblError" min="-2" pref="22" max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" resourceKey="jLabel1.text"/>
+        <Property name="name" type="java.lang.String" value="jLabel1" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel2">
+      <Properties>
+        <Property name="text" type="java.lang.String" resourceKey="jLabel2.text"/>
+        <Property name="name" type="java.lang.String" value="jLabel2" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel3">
+      <Properties>
+        <Property name="text" type="java.lang.String" resourceKey="jLabel3.text"/>
+        <Property name="name" type="java.lang.String" value="jLabel3" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel4">
+      <Properties>
+        <Property name="text" type="java.lang.String" resourceKey="jLabel4.text"/>
+        <Property name="name" type="java.lang.String" value="jLabel4" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel5">
+      <Properties>
+        <Property name="text" type="java.lang.String" resourceKey="jLabel5.text"/>
+        <Property name="name" type="java.lang.String" value="jLabel5" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel6">
+      <Properties>
+        <Property name="text" type="java.lang.String" resourceKey="jLabel6.text"/>
+        <Property name="name" type="java.lang.String" value="jLabel6" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel7">
+      <Properties>
+        <Property name="text" type="java.lang.String" resourceKey="jLabel7.text"/>
+        <Property name="name" type="java.lang.String" value="jLabel7" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtFieldNumber">
+      <Properties>
+        <Property name="text" type="java.lang.String" resourceKey="txtFieldNumber.text"/>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+            <LineBorder>
+              <Property name="color" resourceKey="txtFieldCoPilot.border.lineColor"/>
+            </LineBorder>
+          </Border>
+        </Property>
+        <Property name="name" type="java.lang.String" value="txtFieldNumber" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtFieldPilot">
+      <Properties>
+        <Property name="background" type="java.awt.Color" resourceKey="txtFieldCoPilot.background"/>
+        <Property name="editable" type="boolean" value="false"/>
+        <Property name="text" type="java.lang.String" resourceKey="txtFieldPilot.text"/>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+            <LineBorder>
+              <Property name="color" resourceKey="txtFieldCoPilot.border.lineColor"/>
+            </LineBorder>
+          </Border>
+        </Property>
+        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[20, 6]"/>
+        </Property>
+        <Property name="name" type="java.lang.String" value="txtFieldPilot" noResource="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtFieldPilotFocusGained"/>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtFieldPilotFocusLost"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="txtFieldPilot.addKeyListener(this);"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtFieldCoPilot">
+      <Properties>
+        <Property name="background" type="java.awt.Color" resourceKey="txtFieldCoPilot.background"/>
+        <Property name="editable" type="boolean" value="false"/>
+        <Property name="text" type="java.lang.String" resourceKey="txtFieldCoPilot.text"/>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+            <LineBorder>
+              <Property name="color" resourceKey="txtFieldCoPilot.border.lineColor"/>
+            </LineBorder>
+          </Border>
+        </Property>
+        <Property name="name" type="java.lang.String" value="txtFieldCoPilot" noResource="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtFieldCoPilotFocusGained"/>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtFieldCoPilotFocusLost"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="txtFieldCoPilot.addKeyListener(this);"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtFieldFrom">
+      <Properties>
+        <Property name="background" type="java.awt.Color" resourceKey="txtFieldCoPilot.background"/>
+        <Property name="editable" type="boolean" value="false"/>
+        <Property name="text" type="java.lang.String" resourceKey="txtFieldFrom.text"/>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+            <LineBorder>
+              <Property name="color" resourceKey="txtFieldCoPilot.border.lineColor"/>
+            </LineBorder>
+          </Border>
+        </Property>
+        <Property name="name" type="java.lang.String" value="txtFieldFrom" noResource="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtFieldFromFocusGained"/>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtFieldFromFocusLost"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="txtFieldFrom.addKeyListener(this);"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtFieldDestination">
+      <Properties>
+        <Property name="background" type="java.awt.Color" resourceKey="txtFieldCoPilot.background"/>
+        <Property name="editable" type="boolean" value="false"/>
+        <Property name="text" type="java.lang.String" resourceKey="txtFieldDestination.text"/>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+            <LineBorder>
+              <Property name="color" resourceKey="txtFieldCoPilot.border.lineColor"/>
+            </LineBorder>
+          </Border>
+        </Property>
+        <Property name="name" type="java.lang.String" value="txtFieldDestination" noResource="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtFieldDestinationFocusGained"/>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtFieldDestinationFocusLost"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="txtFieldDestination.addKeyListener(this);"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtFieldPlane">
+      <Properties>
+        <Property name="background" type="java.awt.Color" resourceKey="txtFieldCoPilot.background"/>
+        <Property name="editable" type="boolean" value="false"/>
+        <Property name="text" type="java.lang.String" resourceKey="txtFieldPlane.text"/>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+            <LineBorder>
+              <Property name="color" resourceKey="txtFieldCoPilot.border.lineColor"/>
+            </LineBorder>
+          </Border>
+        </Property>
+        <Property name="name" type="java.lang.String" value="txtFieldPlane" noResource="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtFieldPlaneFocusGained"/>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtFieldPlaneFocusLost"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnSave">
+      <Properties>
+        <Property name="text" type="java.lang.String" resourceKey="btnSave.text"/>
+        <Property name="name" type="java.lang.String" value="btnSave" noResource="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSaveActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnCancel">
+      <Properties>
+        <Property name="text" type="java.lang.String" resourceKey="btnCancel.text"/>
+        <Property name="name" type="java.lang.String" value="btnCancel" noResource="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelActionPerformed"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+      <Properties>
+        <Property name="name" type="java.lang.String" value="jScrollPane1" noResource="true"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JList" name="listSearchResults">
+          <Properties>
+            <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
+              <StringArray count="0"/>
+            </Property>
+            <Property name="selectionMode" type="int" value="0"/>
+            <Property name="enabled" type="boolean" value="false"/>
+            <Property name="name" type="java.lang.String" value="listSearchResults" noResource="true"/>
+          </Properties>
+          <Events>
+            <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="listSearchResultsValueChanged"/>
+          </Events>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JTextField" name="txtFieldDate">
+      <Properties>
+        <Property name="text" type="java.lang.String" resourceKey="txtFieldDate.text"/>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+            <LineBorder>
+              <Property name="color" resourceKey="txtFieldCoPilot.border.lineColor"/>
+            </LineBorder>
+          </Border>
+        </Property>
+        <Property name="name" type="java.lang.String" value="txtFieldDate" noResource="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtFieldDateFocusLost"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel8">
+      <Properties>
+        <Property name="text" type="java.lang.String" resourceKey="jLabel8.text"/>
+        <Property name="name" type="java.lang.String" value="jLabel8" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblError">
+      <Properties>
+        <Property name="text" type="java.lang.String" resourceKey="lblError.text"/>
+        <Property name="name" type="java.lang.String" value="lblError" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtPersonal">
+      <Properties>
+        <Property name="text" type="java.lang.String" resourceKey="txtPersonal.text"/>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+            <LineBorder>
+              <Property name="color" resourceKey="txtFieldCoPilot.border.lineColor"/>
+            </LineBorder>
+          </Border>
+        </Property>
+        <Property name="name" type="java.lang.String" value="txtPersonal" noResource="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtPersonalMouseClicked"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtFieldStops">
+      <Properties>
+        <Property name="text" type="java.lang.String" resourceKey="txtFieldStops.text"/>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+            <LineBorder>
+              <Property name="color" resourceKey="txtFieldCoPilot.border.lineColor"/>
+            </LineBorder>
+          </Border>
+        </Property>
+        <Property name="name" type="java.lang.String" value="txtFieldStops" noResource="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtFieldStopsMouseClicked"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel9">
+      <Properties>
+        <Property name="text" type="java.lang.String" resourceKey="jLabel9.text"/>
+        <Property name="name" type="java.lang.String" value="jLabel9" noResource="true"/>
+      </Properties>
+    </Component>
+  </SubComponents>
+</Form>

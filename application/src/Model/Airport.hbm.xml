@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 29-mei-2013 13:24:19 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="flyaway" name="Model.Airport" table="airport">
+    <id name="id" type="int">
+      <column name="id"/>
+      <generator class="native"/>
+    </id>
+    <property name="code" type="string">
+      <column length="5" name="code"/>
+    </property>
+    <property name="name" type="string">
+      <column name="name" not-null="true"/>
+    </property>
+    <property name="city" type="string">
+      <column name="city" not-null="true"/>
+    </property>
+    <property name="country" type="string">
+      <column name="country" not-null="true"/>
+    </property>
+    <property name="landcode" type="string">
+      <column length="5" name="landcode"/>
+    </property>
+    <property name="region" type="java.lang.Integer">
+      <column name="region" not-null="false"/>
+    </property>
+  </class>
+</hibernate-mapping>

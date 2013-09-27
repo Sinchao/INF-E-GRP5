@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 29-mei-2013 13:24:19 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="flyaway" name="Model.User" table="user">
+    <id name="id" type="int">
+      <column name="id"/>
+      <generator class="native"/>
+    </id>
+    <property name="rank">
+      <column name="rank" not-null="true"/>
+      <type name="org.hibernate.type.EnumType">
+        <param name="enumClass">Model.Rank</param>
+        <param name="type">12</param>
+        <param name="useNamed">true</param>
+      </type>
+    </property>
+    <property name="username" type="string">
+      <column name="username" not-null="true"/>
+    </property>
+    <property name="password" type="string">
+      <column name="password" not-null="true"/>
+    </property>
+    <joined-subclass extends="Model.User" name="Model.Staff" table="staff">
+      <key column="id"/>
+      <property name="type">
+        <column name="type" not-null="true"/>
+        <type name="org.hibernate.type.EnumType">
+          <param name="enumClass">Model.PersonalType</param>
+          <param name="type">12</param>
+          <param name="useNamed">true</param>
+        </type>
+      </property>
+      <property name="name" type="string">
+        <column name="name" not-null="true"/>
+      </property>
+      <many-to-one class="Model.Airport" fetch="select" name="primaryAirport">
+        <column name="primaryAirport" not-null="false"/>
+      </many-to-one>
+    </joined-subclass>
+  </class>
+</hibernate-mapping>
