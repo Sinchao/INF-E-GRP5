@@ -30,7 +30,9 @@ public class CreateChangeUser extends javax.swing.JInternalFrame {
 
         Rank ranks[] = Rank.values();
         for (Rank r : ranks) {
+            if(r != Rank.STAFF){
             cmbBoxType.addItem(r);
+            }
         }
         cmbBoxType.setSelectedItem(Rank.USER);
 

@@ -542,6 +542,11 @@ public class CreateChangeFlightView extends javax.swing.JInternalFrame implement
             errorMessage += "Destination and From airfield can't be the same \n";
         }
 
+        
+        if (other.size() > 5){
+            errorMessage += "No more than 5 extra personel are allowed on a flight \n";
+        }
+        
         if (other.contains(pilot) || other.contains(coPilot)) {
             errorMessage += "A pilot or copilot cannot also be registered as other personal \n";
         }
