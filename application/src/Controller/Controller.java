@@ -150,6 +150,21 @@ public class Controller extends Observable {
             return null;
         }
     }
+    
+    public List busyStaff(Flight flight){
+        List returnList = new ArrayList();
+        try{
+            initSession();
+            Transaction tx = session.beginTransaction();
+            returnList = session.createSQLQuery("select staff from flightstaff where flight = ?").list();
+            
+            
+        } catch (Exception ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+            return null;
+        }
+        return returnList;
+    }
 
     public boolean save(Object obj) {
         boolean result = false;
