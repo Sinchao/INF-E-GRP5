@@ -68,8 +68,13 @@ public class Controller extends Observable {
         boolean result = false;
 
         initSession();
-        List results = session.createSQLQuery("SELECT id,username,PASSWORD,rank FROM `user` WHERE username='" +username + "' and password=md5('" + password + "')").list();
-
+        String hql = "SELECT id,username,password,rank FROM User WHERE username= :userName and password=md5(:passWord)";
+         
+        List results = session.createQuery(hql)
+        .setParameter("passWord", password)
+        .setParameter("userName", username)
+        .list();
+        
         if (!results.isEmpty()) {
             User usr = new User();
             Object[] o = (Object[]) results.get(0);
