@@ -620,8 +620,7 @@ public class CreateChangeFlightView extends javax.swing.JInternalFrame implement
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void txtPersonalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPersonalMouseClicked
-        ArrayList<Staff> stewarts = Controller.Instance().getStaff(PersonalType.Stewardess);
-        
+         ArrayList<Staff> stewarts = Controller.Instance().searchStaffStewartsAvailable(date);
         final ChildPicker<Staff> staff = new ChildPicker<Staff>(stewarts, other);
 
         staff.setVisible(true);
