@@ -14,6 +14,7 @@ import Util.GenericTableModel;
 import Controller.Controller;
 import Model.Airport;
 import java.util.*;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -202,12 +203,16 @@ public class AirportView extends javax.swing.JInternalFrame implements Observer 
         if (selectedRow >= 0) {
             GenericTableModel<Airport> gtm = (GenericTableModel<Airport>) tblAirport.getModel();
             Airport a = gtm.getRow(selectedRow);
-            if (Controller.Instance().delete(a)) {
-                gtm.removeRow(a);
-            }
-            else {
-                lblErrorMessage.setText("Please delete this airport from all flights first.");     
-            }
+            int option = JOptionPane.showConfirmDialog(null, "Are you sure you want to remove airport \n" + a.getName() + "?", "Remove airport", JOptionPane.YES_NO_OPTION);
+                if(option == JOptionPane.YES_OPTION){
+                   if(Controller.Instance().removeAirport(a)){
+                   gtm.removeRow(a);
+                   JOptionPane.showMessageDialog(this, "Airport \"" + a.getName() + "\" deleted");
+                  
+                   }else {
+                    lblErrorMessage.setText("Please delete this airport from all flights first.");     
+                   }
+                }
             
         } else {
             lblErrorMessage.setText("Please select a row first.");

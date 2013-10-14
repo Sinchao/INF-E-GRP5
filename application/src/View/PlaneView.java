@@ -17,6 +17,7 @@ import java.awt.Color;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -198,13 +199,16 @@ public class PlaneView extends javax.swing.JInternalFrame implements Observer {
         int index = tblPlanes.getSelectedRow();
         if (index >= 0) {
             Plane p = ((GenericTableModel<Plane>) tblPlanes.getModel()).getRow(index);
-            if (Controller.Instance().delete(p)) {
-                System.out.println("Plane deleted.");
-            }
-            else {
-                lblErrorMessage.setText("This plane is still used in a flight.");
-            }
-            ((GenericTableModel<Plane>) tblPlanes.getModel()).removeRow(p);
+           int option = JOptionPane.showConfirmDialog(null, "Are you sure you want to remove plane \n" + p.getNumber() + "?", "Delete Plane", JOptionPane.YES_NO_OPTION);
+                if(option == JOptionPane.YES_OPTION){
+                   if(Controller.Instance().delete(p)){
+                      ((GenericTableModel<Plane>) tblPlanes.getModel()).removeRow(p);
+                      JOptionPane.showMessageDialog(this, "Plane \"" + p.getNumber() + "\" deleted");
+                   
+                   }else {
+                    lblErrorMessage.setText("This plane is still used in a flight.");
+                   }
+                }
         } else {
             lblErrorMessage.setText("Please select a row first");
         }

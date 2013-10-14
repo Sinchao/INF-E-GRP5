@@ -22,6 +22,7 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.TableColumnModel;
 import org.jdesktop.application.FrameView;
 
@@ -212,7 +213,11 @@ public class FlightView extends javax.swing.JInternalFrame implements Observer {
         if (index >= 0) {
             GenericTableModel<Flight> gtm = (GenericTableModel<Flight>) tblFlights.getModel();
             Flight f = gtm.getRow(index);
-            Controller.Instance().removeFlight(f);
+            int option = JOptionPane.showConfirmDialog(null, "Are you sure you want to remove flight \n" + f.getNumber() + "?", "Delete Flight", JOptionPane.YES_NO_OPTION);
+                if(option == JOptionPane.YES_OPTION){
+                   Controller.Instance().removeFlight(f);
+                   JOptionPane.showMessageDialog(this, "Flight \"" + f.getNumber() + "\" deleted");
+                }
         } else {
             lblErrorMessage.setText("Please select a row first");
         }
