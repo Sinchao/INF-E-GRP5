@@ -258,7 +258,7 @@ public class CreateChangeStaffView extends javax.swing.JInternalFrame {
                 staff.setRank(Rank.STAFF);
                 
 
-                if (Controller.Controller.Instance().addStaff(staff)) {
+                if (Controller.Controller.Instance().save(staff)) {
                     JOptionPane.showMessageDialog(this, "Staff " + staff.getName() + " Saved");
                     this.dispose();
                 }

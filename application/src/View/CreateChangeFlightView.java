@@ -590,7 +590,7 @@ public class CreateChangeFlightView extends javax.swing.JInternalFrame implement
                 flight.setPlane(plane);
                 flight.setStops(new HashSet<Airport>(stops));
 
-                if (Controller.Instance().addFlight(flight)) {
+                if (Controller.Instance().save(flight)) {
                     JOptionPane.showMessageDialog(this, "Flight added");
                     this.dispose();
                 } else {
@@ -608,7 +608,7 @@ public class CreateChangeFlightView extends javax.swing.JInternalFrame implement
                 newFlight.setPlane(plane);
                 newFlight.setStops(new HashSet<Airport>(stops));
 
-                if (Controller.Instance().updateFlight(newFlight, flight)) {
+                if (Controller.Instance().update(flight)) {
                     JOptionPane.showMessageDialog(this, "Flight saved");
                     this.dispose();
                 } else {

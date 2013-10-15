@@ -262,7 +262,7 @@ public class CreateChangeAirportView extends javax.swing.JInternalFrame {
                 airport.setRegion(region);
                 airport.setLandcode(landcode);
 
-                if (Controller.Controller.Instance().addAirport(airport)) {
+                if (Controller.Controller.Instance().save(airport)) {
                     JOptionPane.showMessageDialog(this, "Airport saved");
                     this.dispose();
                 } else {

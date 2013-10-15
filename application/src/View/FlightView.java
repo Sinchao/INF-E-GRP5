@@ -215,7 +215,7 @@ public class FlightView extends javax.swing.JInternalFrame implements Observer {
             Flight f = gtm.getRow(index);
             int option = JOptionPane.showConfirmDialog(null, "Are you sure you want to remove flight \n" + f.getNumber() + "?", "Delete Flight", JOptionPane.YES_NO_OPTION);
                 if(option == JOptionPane.YES_OPTION){
-                   Controller.Instance().removeFlight(f);
+                   Controller.Instance().delete(f);
                    JOptionPane.showMessageDialog(this, "Flight \"" + f.getNumber() + "\" deleted");
                 }
         } else {
@@ -224,14 +224,18 @@ public class FlightView extends javax.swing.JInternalFrame implements Observer {
     }//GEN-LAST:event_btnNewActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        try {
-            String searchDate = txtFieldSearch.getText();
-            SimpleDateFormat sdf = new SimpleDateFormat(Flight.FLIGHTDATAFORMAT);
-            fillTable(Controller.Instance().searchFlight(sdf.parse(searchDate)));
-        } catch (ParseException ex) {
-            lblErrorMessage.setText("Fill in a correct date in the format " + Flight.FLIGHTDATAFORMAT);
-            Logger.getLogger(FlightView.class.getName()).log(Level.SEVERE, null, ex);
-        }
+         if(!txtFieldSearch.getText().isEmpty()){
+            try {
+                String searchDate = txtFieldSearch.getText();
+                SimpleDateFormat sdf = new SimpleDateFormat(Flight.FLIGHTDATAFORMAT);
+                fillTable(Controller.Instance().searchFlight(sdf.parse(searchDate)));
+            } catch (ParseException ex) {
+                lblErrorMessage.setText("Fill in a correct date in the format " + Flight.FLIGHTDATAFORMAT);
+                Logger.getLogger(FlightView.class.getName()).log(Level.SEVERE, null, ex);
+            }
+       }else{
+           fillTable(Controller.Instance().getFlights());
+       }
     }//GEN-LAST:event_btnSearchActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnChange;

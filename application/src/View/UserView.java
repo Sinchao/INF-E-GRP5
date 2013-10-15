@@ -194,7 +194,7 @@ public class UserView extends javax.swing.JInternalFrame implements Observer {
             User user = userModel.getRow(selected);
             int option = JOptionPane.showConfirmDialog(null, "Are you sure you want to remove user \n" + user.getUsername() + "?", "Remove user", JOptionPane.YES_NO_OPTION);
                 if(option == JOptionPane.YES_OPTION){
-                    Controller.Instance().removeUser(user);
+                    Controller.Instance().delete(user);
                     JOptionPane.showMessageDialog(this, "User \"" + user.getUsername() + "\" deleted");
                 }
                 

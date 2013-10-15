@@ -205,7 +205,7 @@ public class AirportView extends javax.swing.JInternalFrame implements Observer 
             Airport a = gtm.getRow(selectedRow);
             int option = JOptionPane.showConfirmDialog(null, "Are you sure you want to remove airport \n" + a.getName() + "?", "Remove airport", JOptionPane.YES_NO_OPTION);
                 if(option == JOptionPane.YES_OPTION){
-                   if(Controller.Instance().removeAirport(a)){
+                   if(Controller.Instance().delete(a)){
                    gtm.removeRow(a);
                    JOptionPane.showMessageDialog(this, "Airport \"" + a.getName() + "\" deleted");
                   

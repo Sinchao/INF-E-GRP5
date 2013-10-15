@@ -194,7 +194,7 @@ public class StaffView extends javax.swing.JInternalFrame implements Observer {
             Staff s = ((GenericTableModel<Staff>) tblPersonal.getModel()).getRow(selectedIndex);
             int option = JOptionPane.showConfirmDialog(null, "Are you sure you want to remove staff \n" + s.getName() + "?", "Remove staff", JOptionPane.YES_NO_OPTION);
                 if(option == JOptionPane.YES_OPTION){
-                   if(Controller.Instance().removeStaff(s)){
+                   if(Controller.Instance().delete(s)){
                       ((GenericTableModel<Staff>) tblPersonal.getModel()).removeRow(s);
                        JOptionPane.showMessageDialog(this, "Staff \"" + s.getName() + "\" deleted");
                 

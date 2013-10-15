@@ -192,7 +192,7 @@ public class CreateChangeUser extends javax.swing.JInternalFrame {
                 u.setPassword(password, true);
                 u.setRank((Rank) cmbBoxType.getSelectedItem());
 
-                if (Controller.Instance().addUser(u)) {
+                if (Controller.Instance().save(u)) {
                     JOptionPane.showMessageDialog(this, "User \"" + u.getUsername() + "\" saved");
                     this.dispose();
                 } else {
