@@ -68,7 +68,8 @@ public class Controller extends Observable {
         boolean result = false;
 
         initSession();
-        String hql = "SELECT id,username,password,rank FROM User WHERE username= :userName and password=md5(:passWord)";
+        
+        String hql = "SELECT id,username,password,rank FROM User WHERE username= :userName and password=sha2(:passWord,256)";
          
         List results = session.createQuery(hql)
         .setParameter("passWord", password)
