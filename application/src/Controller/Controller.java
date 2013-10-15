@@ -691,7 +691,7 @@ public class Controller extends Observable {
         }
     }
     
-     public boolean addUser(User u) {
+    public boolean addUser(User u) {
         initSession();
         boolean result = false;
         try {
@@ -718,6 +718,16 @@ public class Controller extends Observable {
         return result;
     }
     
-    
+    public ArrayList<User> searchUsers(String username) {
+        ArrayList<User> foundUsers = new ArrayList<User>();
+        for (User u : getUsers(true)) {
+            if (u.getUsername().contains(username)) {
+
+                foundUsers.add(u);
+            }
+        }
+        return foundUsers;
+    }
+   
     // </editor-fold>
 }
