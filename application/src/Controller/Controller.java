@@ -267,6 +267,33 @@ public class Controller extends Observable {
 
         return foundAirport;
     }
+    
+     public boolean addAirport(Airport a) {
+        initSession();
+        boolean result = false;
+        try {
+            if (save(a)) {
+                result = true;
+            }
+
+            if (result) {
+                this.notifyObservers(a);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+        }
+        return result;
+    }    
+    
+    public boolean removeAirport(Airport a) {
+        boolean result = false;
+
+        if (delete(a)) {
+            result = true;
+            notifyObservers(a);
+        }
+        return result;
+    }
 
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="FLIGHT">
@@ -527,7 +554,37 @@ public class Controller extends Observable {
     public Staff getStaffById(int staffId) {
         return loadById(Staff.class, staffId);
     }
+    
+    public boolean addStaff(Staff s) {
+        initSession();
+        boolean result = false;
+        try {
+            if (save(s)) {
+                result = true;
+            }
 
+            if (result) {
+                this.notifyObservers(s);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+        }
+        return result;
+    }
+       
+       
+    public boolean removeStaff(Staff s) {
+        boolean result = false;
+
+        if (delete(s)) {
+            result = true;
+            notifyObservers(s);
+        }
+        return result;
+    }
+
+   
+    
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="PLANES">
     public ArrayList<Plane> getPlanes() {
@@ -590,6 +647,33 @@ public class Controller extends Observable {
     public Plane getPlaneById(int planeId) {
         return loadById(Plane.class, planeId);
     }
+    
+     public boolean addPlane(Plane p) {
+        initSession();
+        boolean result = false;
+        try {
+            if (save(p)) {
+                result = true;
+            }
+
+            if (result) {
+                this.notifyObservers(p);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+        }
+        return result;
+    }    
+    
+    public boolean removePlane(Plane p) {
+        boolean result = false;
+
+        if (delete(p)) {
+            result = true;
+            notifyObservers(p);
+        }
+        return result;
+    }
 
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="USERS">
@@ -607,5 +691,44 @@ public class Controller extends Observable {
             return new ArrayList<User>(list(User.class));
         }
     }
+    
+    public boolean addUser(User u) {
+        initSession();
+        boolean result = false;
+        try {
+            if (save(u)) {
+                result = true;
+            }
+
+            if (result) {
+                this.notifyObservers(u);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+        }
+        return result;
+    }    
+    
+    public boolean removeUser(User u) {
+        boolean result = false;
+
+        if (delete(u)) {
+            result = true;
+            notifyObservers(u);
+        }
+        return result;
+    }
+    
+    public ArrayList<User> searchUsers(String username) {
+        ArrayList<User> foundUsers = new ArrayList<User>();
+        for (User u : getUsers(true)) {
+            if (u.getUsername().contains(username)) {
+
+                foundUsers.add(u);
+            }
+        }
+        return foundUsers;
+    }
+   
     // </editor-fold>
 }

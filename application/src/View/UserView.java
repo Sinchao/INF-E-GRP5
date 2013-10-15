@@ -16,6 +16,8 @@ import Model.User;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -109,6 +111,11 @@ public class UserView extends javax.swing.JInternalFrame implements Observer {
 
         btnSearch.setText(resourceMap.getString("btnSearch.text")); // NOI18N
         btnSearch.setName("btnSearch"); // NOI18N
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
 
         txtFieldSearch.setText(resourceMap.getString("txtFieldSearch.text")); // NOI18N
         txtFieldSearch.setName("txtFieldSearch"); // NOI18N
@@ -169,7 +176,7 @@ public class UserView extends javax.swing.JInternalFrame implements Observer {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnClose)
                     .addComponent(lblError, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         pack();
@@ -185,9 +192,12 @@ public class UserView extends javax.swing.JInternalFrame implements Observer {
         if (selected >= 0) {
             GenericTableModel<User> userModel = (GenericTableModel<User>) tblUsers.getModel();
             User user = userModel.getRow(selected);
-            Controller.Instance().delete(user);
-            
-            JOptionPane.showMessageDialog(this, "User \"" + user.getUsername() + "\" deleted");
+            int option = JOptionPane.showConfirmDialog(null, "Are you sure you want to remove user \n" + user.getUsername() + "?", "Remove user", JOptionPane.YES_NO_OPTION);
+                if(option == JOptionPane.YES_OPTION){
+                    Controller.Instance().removeUser(user);
+                    JOptionPane.showMessageDialog(this, "User \"" + user.getUsername() + "\" deleted");
+                }
+                
         } else {
             lblError.setText("Please select a row first");
         }
@@ -208,6 +218,29 @@ public class UserView extends javax.swing.JInternalFrame implements Observer {
             app.getFlyAwayView().addFrame(ccu);
         }
     }//GEN-LAST:event_btnChangeActionPerformed
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+      ArrayList<User> foundUsers = new ArrayList<User>();
+        String searchString = txtFieldSearch.getText();
+        if (searchString.isEmpty()) {
+            foundUsers = Controller.Instance().getUsers(true);
+        }else {
+           
+            try {
+                foundUsers.addAll(Controller.Instance().searchUsers(searchString));
+            }catch (NumberFormatException ex) {
+                Logger.getLogger(GenericTableModel.class.getName()).log(Level.FINER, null, ex.getMessage());
+            }
+
+         }
+            GenericTableModel<User> ptm = new GenericTableModel<User>(foundUsers);
+            tblUsers.setModel(ptm);
+            GenericTableModel.removeColumn(tblUsers, "password");
+            GenericTableModel.removeColumn(tblUsers, "id");
+        
+    
+    }//GEN-LAST:event_btnSearchActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnChange;
