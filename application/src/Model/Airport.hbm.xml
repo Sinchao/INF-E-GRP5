@@ -16,14 +16,6 @@
     <property name="city" type="string">
       <column name="city" not-null="true"/>
     </property>
-    <property name="country" type="string">
-      <column name="country" not-null="true"/>
-    </property>
-    <property name="landcode" type="string">
-      <column length="5" name="landcode"/>
-    </property>
-    <property name="region" type="java.lang.Integer">
-      <column name="region" not-null="false"/>
-    </property>
+    <many-to-one class="Model.Country" column="country_id" name="country"/>
   </class>
 </hibernate-mapping>

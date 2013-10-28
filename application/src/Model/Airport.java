@@ -13,10 +13,10 @@ public class Airport {
     private int  id;
     private String code;
     private String name;
-    private String country;
+    private Country country;
     private String city;
-    private String landcode;
-    private Integer region;
+    
+   
      
     public int getId() {
         return id;
@@ -26,27 +26,8 @@ public class Airport {
         this.id = id;
     }
     
-    public void setLandcode(String landcode) {
-        this.landcode = landcode;
-    }
+    
 
-    public void setRegion(Integer region) {
-        if(region != null){
-            this.region = region.intValue();
-        }
-    }
-
-    public String getLandcode() {
-        return landcode;
-    }
-
-    public Integer getRegion() {
-        if(region != null){
-            return region;
-        }else{
-            return null;
-        }
-    }
 
      /**
       * Get the value of code
@@ -89,7 +70,7 @@ public class Airport {
      *
      * @return the value of country
      */
-    public String getCountry() {
+    public Country getCountry() {
         return country;
     }
 
@@ -98,7 +79,7 @@ public class Airport {
      *
      * @param country new value of country
      */
-    public void setCountry(String country) {
+    public void setCountry(Country country) {
         this.country = country;
     }
 

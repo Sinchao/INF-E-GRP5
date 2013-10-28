@@ -8,6 +8,7 @@ import Model.Flight;
 import Model.Rank;
 import Model.User;
 import View.AirportView;
+import View.CountryView;
 import View.FlightView;
 import View.JMarqueeLabel;
 import View.PlaneView;
@@ -15,6 +16,7 @@ import View.ScheduleView;
 import View.StaffView;
 import View.UserView;
 import java.beans.PropertyVetoException;
+import java.util.Observable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.jdesktop.application.ResourceMap;
@@ -28,6 +30,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Observer;
 import javax.swing.Timer;
 import javax.swing.Icon;
 import javax.swing.JButton;
@@ -37,13 +40,15 @@ import javax.swing.JInternalFrame;
 /**
  * The application's main frame.
  */
-public class FlyAWayView extends FrameView {
-
+public final class FlyAWayView extends FrameView implements Observer{
+        private List<Flight> flights;
+    
     public FlyAWayView(SingleFrameApplication app) {
         super(app);
 
         initComponents();
-        renderMarqueeText();
+        Controller.Instance().addObserver(this);
+        this.renderMarqueeText();
 
         // status bar initialization - message timeout, idle icon and busy animation, etc
         ResourceMap resourceMap = getResourceMap();
@@ -116,38 +121,67 @@ public class FlyAWayView extends FrameView {
             btnSchedule.setVisible(true);
         }
     }
+    
+    
+    public void update(Observable o, Object arg) {
+        if (arg instanceof Flight) {
+            this.updateFlightList();
 
-    public void renderMarqueeText() {
-        
+        }
+    }
+    
+      public void updateFlightList() {
+       Date today;
+
         try {
+            DateFormat df = new SimpleDateFormat(Flight.FLIGHTDATAFORMAT);
+            today = df.parse(df.format(new Date()));
+        } catch (ParseException ex) {
+            today = new Date();
+        }
+
+        this.flights = Controller.Instance().searchFlight(today);
+    }
+
+    
+    
+    
+    public void renderMarqueeText() {
+      this.updateFlightList();
+        try {
+    
             Thread marqueeThread = new Thread(new Runnable() {
+                
                 @Override
                 public void run() {
+                    
+                    
                     JMarqueeLabel marqLabel = new JMarqueeLabel();
                      marqLabel.Assign(desktopPane);
+                   
                     for (;;) {
                         try {
                             Thread.sleep(150); 
                             marqLabel.updateLabel(renderFlights());
+                            
+                           
                         } catch (InterruptedException ex) {
                             Logger.getLogger(FlyAWayView.class.getName()).log(Level.SEVERE, null, ex);
                         }
                        
                     }
                 }
+            });
+            marqueeThread.start();
+        }catch (Exception ex) {
+            System.out.printf("%s: %s", ex.getMessage(), ex.getStackTrace());
+              
+        }     
+}
 
-                private synchronized String renderFlights() {
+        private  String renderFlights() {
                     String flightsString = "";
-                    Date today;
-
-                    try {
-                        DateFormat df = new SimpleDateFormat(Flight.FLIGHTDATAFORMAT);
-                        today = df.parse(df.format(new Date()));
-                    } catch (ParseException ex) {
-                        today = new Date();
-                    }
-
-                    List<Flight> flights = Controller.Instance().searchFlight(today);
+                   
                     StringBuilder sb = new StringBuilder();
                     for (Flight flight : flights) {
                         sb.append(String.format("Vlucht: %s", flight.getNumber()));
@@ -158,18 +192,13 @@ public class FlyAWayView extends FrameView {
                         sb.append(String.format(",  %s] ", flight.getCopilot().getName()));
                         flightsString = String.format("%s %s ", flightsString, sb.toString());
                     }
-
+                       
                     if (flights.size() < 1) {
                         return "Geen vluchten vandaag.";
                     }
                     return flightsString;
                 }
-            });
-            marqueeThread.start();
-        } catch (Exception ex) {
-            System.out.printf("%s: %s", ex.getMessage(), ex.getStackTrace());
-        }
-    }
+           
 
     public void addFrame(JInternalFrame frame) {
         frame.show();
@@ -206,6 +235,7 @@ public class FlyAWayView extends FrameView {
         btnFlight = new javax.swing.JButton();
         btnUsers = new javax.swing.JButton();
         btnSchedule = new javax.swing.JButton();
+        btnCountry = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         javax.swing.JMenu fileMenu = new javax.swing.JMenu();
         miLogout = new javax.swing.JMenuItem();
@@ -281,6 +311,14 @@ public class FlyAWayView extends FrameView {
             }
         });
 
+        btnCountry.setText(resourceMap.getString("btnCountry.text")); // NOI18N
+        btnCountry.setName("btnCountry"); // NOI18N
+        btnCountry.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCountryActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -288,13 +326,20 @@ public class FlyAWayView extends FrameView {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnAirport, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
-                    .addComponent(btnFlight, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
-                    .addComponent(btnUsers, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
-                    .addComponent(btnSchedule, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnPlane, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
-                    .addComponent(btnStaff, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnSchedule, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
+                        .addGap(2, 2, 2))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnAirport, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
+                            .addComponent(btnFlight, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
+                            .addComponent(btnUsers, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
+                            .addComponent(btnPlane, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
+                            .addComponent(btnStaff, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE))
+                        .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnCountry, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -309,8 +354,10 @@ public class FlyAWayView extends FrameView {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnUsers)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnCountry, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnSchedule)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addGap(11, 11, 11))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnAirport, btnFlight, btnPlane, btnStaff});
@@ -320,9 +367,9 @@ public class FlyAWayView extends FrameView {
         mainPanelLayout.setHorizontalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 603, Short.MAX_VALUE))
+                .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 595, Short.MAX_VALUE))
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblWelkom, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -337,8 +384,8 @@ public class FlyAWayView extends FrameView {
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(mainPanelLayout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(297, Short.MAX_VALUE))
-                    .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 519, Short.MAX_VALUE)))
+                        .addContainerGap(309, Short.MAX_VALUE))
+                    .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 524, Short.MAX_VALUE)))
         );
 
         menuBar.setName("menuBar"); // NOI18N
@@ -463,8 +510,15 @@ public class FlyAWayView extends FrameView {
         FlyAWayApp.getApplication().startup();
         this.getFrame().dispose();
     }//GEN-LAST:event_miLogoutActionPerformed
+
+    private void btnCountryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCountryActionPerformed
+        CountryView cv = new CountryView();
+        addFrame(cv);
+    }//GEN-LAST:event_btnCountryActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAirport;
+    private javax.swing.JButton btnCountry;
     private javax.swing.JButton btnFlight;
     private javax.swing.JButton btnPlane;
     private javax.swing.JButton btnSchedule;
@@ -487,4 +541,5 @@ public class FlyAWayView extends FrameView {
     private final Icon idleIcon;
     private final Icon[] busyIcons = new Icon[15];
     private int busyIconIndex = 0;
+
 }

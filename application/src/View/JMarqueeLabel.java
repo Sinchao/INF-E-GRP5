@@ -39,7 +39,7 @@ public class JMarqueeLabel extends JLabel implements ActionListener {
             this.setLocation(0, (int) this.getLocation().getY());
         }
         setText(marqLabelContent);
-        setLocation((int) (this.getLocation().getX()), (int) this.getLocation().getY() + 1);
+        setLocation((int) (this.getLocation().getX() +1), (int) this.getLocation().getY() );
 
     }
 }

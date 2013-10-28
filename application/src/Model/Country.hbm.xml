@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class catalog="flyaway" name="Model.Country" table="country">
+    <id name="id" type="integer">
+      <column name="id"/>
+      <generator class="native"/>
+    </id>
+    <property name="landcode" type="string">
+      <column name="landcode" not-null="true"/>
+    </property>
+    <property name="country" type="string">
+      <column name="country" not-null="true"/>
+    </property>
+    <property name="region" type="java.lang.Integer">
+      <column name="region" not-null="true"/>
+    </property>
+  </class>
+</hibernate-mapping>

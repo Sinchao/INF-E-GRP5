@@ -229,7 +229,7 @@ public class Controller extends Observable {
         for (Airport a : getAirports()) {
             if (a.getCity().contains(searchString)) {
                 result.add(a);
-            } else if (a.getCountry().contains(searchString)) {
+            } else if (a.getCountry().getCountry().contains(searchString)) {
                 result.add(a);
             } else if (a.getName().contains(searchString)) {
                 result.add(a);
@@ -597,4 +597,21 @@ public class Controller extends Observable {
     }
    
     // </editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="COUNTRY">
+    public ArrayList<Country> getCountries() {
+        return new ArrayList<Country>(list(Country.class));
+    }
+    
+    public ArrayList<Country> searchCountry(String name) {
+        ArrayList<Country> result = new ArrayList<Country>();
+
+        for (Country c : getCountries()) {
+            if (c.getCountry().toLowerCase().contains(name.toLowerCase())) {
+                result.add(c);
+            }
+        }
+        return result;
+    }
+    // </editor-fold>
+
 }
