@@ -29,19 +29,22 @@ public class CreateChangeAirportView extends javax.swing.JInternalFrame implemen
     private Country country = null;
 
     /** Creates new form CreateChangeAirportView */
-    public CreateChangeAirportView(Airport airport) {
+    public CreateChangeAirportView(Airport a) {
         initComponents();
-        this.airport = airport;
+        airport = a;
         if (airport != null) {
-            fillFields();
+            fillFields(a);
         }
     }
 
-    private void fillFields() {
+    private void fillFields(Airport a) {
         this.txtFieldCity.setText(airport.getCity());
-        this.txtFieldCountry.setText(airport.getCountry().getCountry());
+        this.txtFieldCountry.setText(airport.getCountry().toString());
         this.txtFieldName.setText(airport.getName());
         this.txtFieldCode.setText(airport.getCode());
+       
+        
+        country = a.getCountry();
         
     }
     

@@ -12,7 +12,11 @@ package View;
 
 import Model.PersonalType;
 import Model.Rank;
+import Controller.Controller;
+import Model.Airport;
 import Model.Staff;
+import java.awt.Color;
+import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.ToolTipManager;
 
@@ -23,6 +27,7 @@ import javax.swing.ToolTipManager;
 public class CreateChangeStaffView extends javax.swing.JInternalFrame {
 
     Staff staff = null;
+    Airport airport = null;
 
     /** Creates new form CreateChangeStaffView */
     public CreateChangeStaffView(Staff s) {
@@ -42,9 +47,17 @@ public class CreateChangeStaffView extends javax.swing.JInternalFrame {
         txtFieldID.setText("" + s.getId());
         txtFieldName.setText(s.getName());
         txtUsername.setText(s.getUsername());
+        
         cmbBoxPersonalTypes.setSelectedItem(s.getType());
         
         lblPassword.setText("Change password");
+        
+        if(s.getPrimaryAirport() != null){
+        airport = s.getPrimaryAirport();
+        txtFieldAirport.setText(s.getPrimaryAirport().toString());
+        
+        }
+       
     }
 
     /** This method is called from within the constructor to
@@ -66,13 +79,17 @@ public class CreateChangeStaffView extends javax.swing.JInternalFrame {
         btnCancel = new javax.swing.JButton();
         lblErrorMessage = new javax.swing.JLabel();
         Name1 = new javax.swing.JLabel();
-        txtPassword = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         txtUsername = new javax.swing.JTextField();
         lblPassword = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        txtFieldAirport = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        listSearchResults = new javax.swing.JList();
+        txtPassword = new javax.swing.JPasswordField();
 
         setClosable(true);
         setIconifiable(true);
@@ -122,8 +139,6 @@ public class CreateChangeStaffView extends javax.swing.JInternalFrame {
 
         Name1.setName("Name1"); // NOI18N
 
-        txtPassword.setName("txtPassword"); // NOI18N
-
         jLabel3.setText(resourceMap.getString("jLabel3.text")); // NOI18N
         jLabel3.setName("jLabel3"); // NOI18N
 
@@ -142,86 +157,131 @@ public class CreateChangeStaffView extends javax.swing.JInternalFrame {
         lblPassword.setText(resourceMap.getString("lblPassword.text")); // NOI18N
         lblPassword.setName("lblPassword"); // NOI18N
 
+        jLabel7.setText(resourceMap.getString("jLabel7.text")); // NOI18N
+        jLabel7.setName("jLabel7"); // NOI18N
+
+        txtFieldAirport.setText(resourceMap.getString("txtFieldAirport.text")); // NOI18N
+        txtFieldAirport.setName("txtFieldAirport"); // NOI18N
+        txtFieldAirport.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtFieldAirportFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtFieldAirportFocusLost(evt);
+            }
+        });
+
+        jScrollPane1.setName("jScrollPane1"); // NOI18N
+
+        listSearchResults.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        listSearchResults.setEnabled(false);
+        listSearchResults.setName("listSearchResults"); // NOI18N
+        listSearchResults.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                listSearchResultsValueChanged(evt);
+            }
+        });
+        jScrollPane1.setViewportView(listSearchResults);
+
+        txtPassword.setText(resourceMap.getString("txtPassword.text")); // NOI18N
+        txtPassword.setName("txtPassword"); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblErrorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                            .addComponent(txtFieldName, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                            .addComponent(cmbBoxPersonalTypes, 0, 130, Short.MAX_VALUE)
-                            .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                            .addComponent(txtFieldID, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(lblErrorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(lblPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jLabel7))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtFieldAirport)
+                                    .addComponent(txtPassword)
+                                    .addComponent(txtFieldID)
+                                    .addComponent(txtFieldName)
+                                    .addComponent(txtUsername)
+                                    .addComponent(cmbBoxPersonalTypes, 0, 118, Short.MAX_VALUE))))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(Name1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
+                                .addComponent(jLabel1)
+                                .addGap(197, 197, 197))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(97, 97, 97)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Name)
+                            .addComponent(jLabel2)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(129, 129, 129)
                         .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnCancel)))
-                .addGap(100, 100, 100)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(Name1)
-                            .addComponent(jLabel1))
-                        .addGap(67, 67, 67))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(Name)
-                            .addComponent(jLabel2))
-                        .addGap(63, 63, 63)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addComponent(jLabel2)
-                .addGap(37, 37, 37)
-                .addComponent(Name)
-                .addGap(31, 31, 31)
-                .addComponent(Name1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
-                .addContainerGap(204, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(11, 11, 11)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(11, 11, 11)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addGap(12, 12, 12)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblPassword))
-                .addGap(12, 12, 12)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmbBoxPersonalTypes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSave, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblErrorMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
-                .addGap(100, 100, 100))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addGap(11, 11, 11)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(txtFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(11, 11, 11)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addGap(12, 12, 12)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblPassword)
+                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(20, 20, 20)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(txtFieldAirport, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(cmbBoxPersonalTypes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblErrorMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 17, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSave, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE))
+                        .addGap(42, 42, 42))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(42, 42, 42)
+                                .addComponent(jLabel2)
+                                .addGap(37, 37, 37)
+                                .addComponent(Name)
+                                .addGap(107, 107, 107)
+                                .addComponent(Name1))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1)
+                        .addContainerGap(89, Short.MAX_VALUE))))
         );
 
         pack();
@@ -247,29 +307,37 @@ public class CreateChangeStaffView extends javax.swing.JInternalFrame {
             errorMessage += "*  Please enter a password <br>";
         }
         
+        
 
         if (errorMessage.isEmpty()) {
             if (staff == null) {
                 staff = new Staff();
                 staff.setName(name);
                 staff.setUsername(username);
+                staff.setPrimaryAirport(airport);
                 staff.setType(st);
                 staff.setPassword(password, true);
                 staff.setRank(Rank.STAFF);
                 
 
-                if (Controller.Controller.Instance().save(staff)) {
+                if (Controller.Instance().save(staff)) {
                     JOptionPane.showMessageDialog(this, "Staff " + staff.getName() + " Saved");
                     this.dispose();
                 }
             } else {
                 staff.setName(name);
                 staff.setUsername(username);
+                
+                if(txtFieldAirport.getText().isEmpty()){
+                staff.setPrimaryAirport(null);
+                }else{
+                staff.setPrimaryAirport(airport);                        
+                }
                 staff.setType(st);
                 staff.setPassword(password, true);
                 staff.setRank(Rank.STAFF);
 
-                if (Controller.Controller.Instance().update(staff)) {
+                if (Controller.Instance().update(staff)) {
                     JOptionPane.showMessageDialog(this, "Staff " + staff.getName() + " Saved");
                     this.dispose();
                 }
@@ -288,6 +356,27 @@ public class CreateChangeStaffView extends javax.swing.JInternalFrame {
         ToolTipManager.sharedInstance().setInitialDelay(1);
     }//GEN-LAST:event_txtFieldIDMouseEntered
 
+    private void txtFieldAirportFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFieldAirportFocusGained
+        txtFieldAirport.setBorder(BorderFactory.createLineBorder(Color.orange));
+        listSearchResults.setEnabled(true);
+        listSearchResults.setListData(Controller.Instance().getAirports().toArray());
+    }//GEN-LAST:event_txtFieldAirportFocusGained
+
+    private void txtFieldAirportFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFieldAirportFocusLost
+        txtFieldAirport.setBorder(BorderFactory.createLineBorder(Color.lightGray));
+        listSearchResults.setEnabled(false);
+    }//GEN-LAST:event_txtFieldAirportFocusLost
+
+    private void listSearchResultsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listSearchResultsValueChanged
+        Airport tmpAirport = (Airport) listSearchResults.getSelectedValue();
+        
+        if (tmpAirport != null) {
+            airport = tmpAirport;
+            txtFieldAirport.setText(airport.toString());
+            
+        }
+    }//GEN-LAST:event_listSearchResultsValueChanged
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Name;
     private javax.swing.JLabel Name1;
@@ -300,11 +389,15 @@ public class CreateChangeStaffView extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblErrorMessage;
     private javax.swing.JLabel lblPassword;
+    private javax.swing.JList listSearchResults;
+    private javax.swing.JTextField txtFieldAirport;
     private javax.swing.JTextField txtFieldID;
     private javax.swing.JTextField txtFieldName;
-    private javax.swing.JTextField txtPassword;
+    private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 }

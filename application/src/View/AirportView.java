@@ -188,7 +188,7 @@ public class AirportView extends javax.swing.JInternalFrame implements Observer 
         if (selectedRow >= 0) {
             GenericTableModel<Airport> gtm = (GenericTableModel<Airport>) tblAirport.getModel();
             Airport a = gtm.getRow(selectedRow);
-
+            
             CreateChangeAirportView ccav = new CreateChangeAirportView(a);
             flyaway.FlyAWayApp app = (flyaway.FlyAWayApp) flyaway.FlyAWayApp.getApplication();
             app.getFlyAwayView().addFrame(ccav);
