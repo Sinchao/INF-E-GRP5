@@ -11,5 +11,6 @@ package Model;
 public enum PersonalType {
 
     Pilot,
-    Stewardess
+    Stewardess,
+    Airmarshall
 }

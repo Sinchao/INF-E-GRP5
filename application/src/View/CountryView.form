@@ -31,10 +31,10 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="searchBT" pref="73" max="32767" attributes="1"/>
-                          <Component id="btnChange" pref="73" max="32767" attributes="1"/>
-                          <Component id="btnCreate" pref="73" max="32767" attributes="1"/>
-                          <Component id="btnNew" alignment="0" pref="73" max="32767" attributes="0"/>
+                          <Component id="searchBT" min="-2" pref="73" max="-2" attributes="1"/>
+                          <Component id="btnChange" min="-2" pref="73" max="-2" attributes="1"/>
+                          <Component id="btnNew" alignment="0" min="-2" pref="73" max="-2" attributes="0"/>
+                          <Component id="btnCreate" alignment="0" min="-2" pref="73" max="-2" attributes="1"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -56,22 +56,22 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="searchBT" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
+                  <Component id="searchBT" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtFieldSearch" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="btnCreate" min="-2" pref="26" max="-2" attributes="0"/>
+                      <Component id="btnCreate" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnChange" min="-2" pref="28" max="-2" attributes="0"/>
+                      <Component id="btnChange" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnNew" min="-2" pref="25" max="-2" attributes="0"/>
+                      <Component id="btnNew" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jScrollPane2" min="-2" pref="234" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="lblErrorMessage" pref="31" max="32767" attributes="0"/>
+              <Component id="lblErrorMessage" pref="35" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>

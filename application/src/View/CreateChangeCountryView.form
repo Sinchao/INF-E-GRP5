@@ -31,9 +31,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="lblError" alignment="0" min="-2" pref="191" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="countrySaveBT" min="-2" pref="66" max="-2" attributes="0"/>
+                      <Component id="countrySaveBT" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="10" max="32767" attributes="0"/>
-                      <Component id="countryCancelBT" min="-2" pref="66" max="-2" attributes="0"/>
+                      <Component id="countryCancelBT" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="229" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -49,10 +49,9 @@
                           <Component id="countrynameTextField" alignment="0" max="32767" attributes="1"/>
                           <Component id="landcodeTextField" alignment="0" pref="135" max="32767" attributes="1"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
           </Group>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
@@ -83,18 +82,18 @@
               </Group>
               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="countrySaveBT" pref="29" max="32767" attributes="1"/>
-                  <Component id="countryCancelBT" alignment="0" pref="29" max="32767" attributes="1"/>
+                  <Component id="countrySaveBT" min="-2" max="-2" attributes="1"/>
+                  <Component id="countryCancelBT" alignment="0" min="-2" max="-2" attributes="1"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="lblError" min="-2" pref="57" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="109" max="-2" attributes="0"/>
           </Group>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace min="0" pref="146" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="148" max="32767" attributes="0"/>
                   <Component id="jInternalFrame1" min="-2" pref="0" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="147" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="149" max="32767" attributes="0"/>
               </Group>
           </Group>
       </Group>

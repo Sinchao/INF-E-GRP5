@@ -28,11 +28,13 @@ public class Flight {
     private Staff pilot;
     private Staff copilot;
     private Plane plane;
+    private Set<Airmarshall> marshalls;
 
     public Flight() {
         this.date = new Date();
         this.otherPersonal = new HashSet<Staff>();
         this.stops = new HashSet<Airport>();
+        this.marshalls = new HashSet<Airmarshall>();
     }
 
     /**
@@ -153,6 +155,16 @@ public class Flight {
 
         return false;
     }
+    
+    public boolean findAirmarshalls(Staff ams) {
+       for (Airmarshall am : marshalls) {
+            if (am.getId() == ams.getId()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 
     /**
      * Get the value of stops
@@ -212,5 +224,13 @@ public class Flight {
 
     public void setId(int id) {
         this.id = id;
+    }
+    
+    public Set<Airmarshall> getMarshalls() {
+        return marshalls;
+    }
+
+    public void setMarshalls(Set<Airmarshall> marshalls) {
+        this.marshalls = marshalls;
     }
 }

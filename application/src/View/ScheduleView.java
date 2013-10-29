@@ -46,6 +46,10 @@ public class ScheduleView extends javax.swing.JInternalFrame implements Observer
                     info.add(new ScheduleInfo(f, "Attendant", false));
                     info.add(new ScheduleInfo(f, "Attendant", true));
                 }
+                if (f.findAirmarshalls(stf)){
+                    info.add(new ScheduleInfo(f, "Airmarshall", false));
+                    info.add(new ScheduleInfo(f, "Airmarshall", true));
+                }
             }
             
             if(!info.isEmpty()){

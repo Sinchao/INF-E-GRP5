@@ -11,6 +11,7 @@
 package View;
 
 import Controller.Controller;
+import Model.Airmarshall;
 import Model.Airport;
 import Model.Flight;
 import Model.PersonalType;
@@ -54,6 +55,7 @@ public class CreateChangeFlightView extends javax.swing.JInternalFrame implement
     private Airport destination = null;
     private Plane plane = null;
     private ArrayList<Staff> other = new ArrayList<Staff>();
+    private ArrayList<Airmarshall> marshalls = new ArrayList<Airmarshall>();
     private Date date = new Date();
     private ArrayList<Airport> stops = new ArrayList<Airport>();
 
@@ -92,6 +94,7 @@ public class CreateChangeFlightView extends javax.swing.JInternalFrame implement
         plane = f.getPlane();
 
         other = new ArrayList<Staff>(f.getOtherPersonal());
+        marshalls = new ArrayList<Airmarshall>(f.getMarshalls());
         date = f.getDate();
     }
 
@@ -160,6 +163,8 @@ public class CreateChangeFlightView extends javax.swing.JInternalFrame implement
         txtPersonal = new javax.swing.JTextField();
         txtFieldStops = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
+        txtAirmarshall = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -332,6 +337,17 @@ public class CreateChangeFlightView extends javax.swing.JInternalFrame implement
         jLabel9.setText(resourceMap.getString("jLabel9.text")); // NOI18N
         jLabel9.setName("jLabel9"); // NOI18N
 
+        txtAirmarshall.setBorder(javax.swing.BorderFactory.createLineBorder(resourceMap.getColor("txtAirmarshall.border.lineColor"))); // NOI18N
+        txtAirmarshall.setName("txtAirmarshall"); // NOI18N
+        txtAirmarshall.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtAirmarshallMouseClicked(evt);
+            }
+        });
+
+        jLabel10.setText(resourceMap.getString("jLabel10.text")); // NOI18N
+        jLabel10.setName("jLabel10"); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -352,26 +368,31 @@ public class CreateChangeFlightView extends javax.swing.JInternalFrame implement
                             .addComponent(jLabel7))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtFieldNumber, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
-                            .addComponent(txtFieldPilot, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
-                            .addComponent(txtFieldCoPilot, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
-                            .addComponent(txtFieldPlane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
-                            .addComponent(txtPersonal, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
-                            .addComponent(txtFieldFrom, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
-                            .addComponent(txtFieldDestination, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
-                            .addComponent(txtFieldDate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
-                            .addComponent(txtFieldStops, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE))
+                            .addComponent(txtFieldNumber, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
+                            .addComponent(txtFieldPilot, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
+                            .addComponent(txtFieldCoPilot, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
+                            .addComponent(txtFieldPlane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
+                            .addComponent(txtPersonal, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
+                            .addComponent(txtFieldFrom, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
+                            .addComponent(txtFieldDestination, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
+                            .addComponent(txtFieldDate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
+                            .addComponent(txtFieldStops, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnSave)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnCancel)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(71, 71, 71)
-                        .addComponent(btnSave)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCancel))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(51, 51, 51)
-                        .addComponent(lblError, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)))
+                        .addComponent(lblError, javax.swing.GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtAirmarshall, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
+                .addGap(157, 157, 157))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -415,7 +436,11 @@ public class CreateChangeFlightView extends javax.swing.JInternalFrame implement
                             .addComponent(jLabel7)
                             .addComponent(txtPersonal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane1))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtAirmarshall, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10))
+                .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSave)
                     .addComponent(btnCancel))
@@ -587,6 +612,7 @@ public class CreateChangeFlightView extends javax.swing.JInternalFrame implement
                 flight.setPilot(pilot);
                 flight.setCopilot(coPilot);
                 flight.setOtherPersonal(new HashSet<Staff>(other));
+                flight.setMarshalls(new HashSet<Airmarshall>(marshalls));
                 flight.setPlane(plane);
                 flight.setStops(new HashSet<Airport>(stops));
 
@@ -603,6 +629,7 @@ public class CreateChangeFlightView extends javax.swing.JInternalFrame implement
                 newFlight.setFrom(from);
                 newFlight.setNumber(id);
                 newFlight.setPilot(pilot);
+                newFlight.setMarshalls(new HashSet<Airmarshall>(marshalls));
                 newFlight.setCopilot(coPilot);
                 newFlight.setOtherPersonal(new HashSet<Staff>(other));
                 newFlight.setPlane(plane);
@@ -678,6 +705,26 @@ public class CreateChangeFlightView extends javax.swing.JInternalFrame implement
         this.dispose();
     }//GEN-LAST:event_btnCancelActionPerformed
 
+    private void txtAirmarshallMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtAirmarshallMouseClicked
+       ArrayList<Airmarshall> airmarshalls = Controller.Instance().searchAirmarshallAvailable(date);
+        final ChildPicker<Airmarshall> airmarshall = new ChildPicker<Airmarshall>(airmarshalls, marshalls);
+
+        airmarshall.setVisible(true);
+        airmarshall.getOKButton().addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+                ChangeMarshalls(airmarshall.getSelectedObjects());
+                airmarshall.dispose();
+            }
+        });
+    }//GEN-LAST:event_txtAirmarshallMouseClicked
+
+    private void ChangeMarshalls(ArrayList<Airmarshall> airmarshalls) {
+        marshalls = airmarshalls;
+        txtAirmarshall.setText(marshalls.toString());
+        txtAirmarshall.repaint();
+    }
+        
     private void ChangePersonal(ArrayList<Staff> staff) {
         other = staff;
         txtPersonal.setText(other.toString());
@@ -693,6 +740,7 @@ public class CreateChangeFlightView extends javax.swing.JInternalFrame implement
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnSave;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -704,6 +752,7 @@ public class CreateChangeFlightView extends javax.swing.JInternalFrame implement
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblError;
     private javax.swing.JList listSearchResults;
+    private javax.swing.JTextField txtAirmarshall;
     private javax.swing.JTextField txtFieldCoPilot;
     private javax.swing.JTextField txtFieldDate;
     private javax.swing.JTextField txtFieldDestination;

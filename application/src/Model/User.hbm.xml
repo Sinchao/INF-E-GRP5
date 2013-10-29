@@ -36,7 +36,21 @@
       </property>
       <many-to-one class="Model.Airport" fetch="select" name="primaryAirport">
         <column name="primaryAirport" not-null="false"/>
-      </many-to-one>
-    </joined-subclass>
+      </many-to-one> 
+      
+      <joined-subclass extends="Model.Staff" name="Model.Airmarshall" table="airmarshall">
+    <key column="id"/>
+    <property name="personnelNr" type="integer">
+      <column name="personnel_nr" not-null="true"/>
+    </property>
+    <property name="weaponNr" type="string">
+      <column name="weapon_nr" not-null="true"/>
+    </property>
+    <property name="nationality" type="string">
+      <column name="nationality" not-null="true"/>
+    </property>
+    
+         </joined-subclass> 
+      </joined-subclass>
   </class>
 </hibernate-mapping>

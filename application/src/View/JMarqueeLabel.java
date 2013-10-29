@@ -24,7 +24,7 @@ public class JMarqueeLabel extends JLabel implements ActionListener {
         this.speed = 50;
         this.timer = new Timer(1000 / speed, this);
         this.setFont(new Font("Verdana", Font.PLAIN, 15));
-        this.setSize(640,25);
+        this.setSize(1200,25);
         container.add(this);
         timer.start();
     }

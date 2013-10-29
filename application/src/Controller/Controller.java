@@ -614,4 +614,57 @@ public class Controller extends Observable {
     }
     // </editor-fold>
 
+     //<editor-fold defaultstate="collapsed" desc="AIRMARSHALL">
+    public ArrayList<Airmarshall> getAirmarshalls() {
+        return new ArrayList<Airmarshall>(list(Airmarshall.class));
+    }
+    
+    public ArrayList<Airmarshall> searchAirmarshallAvailable(Date d) {
+
+        ArrayList<Airmarshall> foundAirmarshalls = new ArrayList<Airmarshall>();
+        boolean dontAdd;
+        Date nextDay, previousDay;
+        for (Airmarshall am : getAirmarshalls()) {
+            dontAdd = false;
+            for (Flight f : getFlights()) {
+                if (f.getMarshalls().equals(am)) {
+                    nextDay = (Date) d.clone();
+                    nextDay.setDate(d.getDate() + 1);
+                    previousDay = (Date) d.clone();
+                    previousDay.setDate(d.getDate() - 1);
+
+
+                    if ((f.getDate().getDate() == d.getDate()
+                            && f.getDate().getMonth() == d.getMonth()
+                            && f.getDate().getYear() == d.getYear()) || // staff is already on a plane today
+                            (f.getDate().getDate() == nextDay.getDate()
+                            && f.getDate().getMonth() == nextDay.getMonth()
+                            && f.getDate().getYear() == nextDay.getYear()) || // staff is already on a plane tomorrow
+                            (f.getDate().getDate() == previousDay.getDate()
+                            && f.getDate().getMonth() == previousDay.getMonth()
+                            && f.getDate().getYear() == previousDay.getYear()) // staff was already on a plane yesterday
+                            ) {
+                        dontAdd = true;
+                    }
+                }
+            }
+            if (!dontAdd) {
+                foundAirmarshalls.add(am);
+            }
+        }
+        return foundAirmarshalls;
+    }
+    
+    
+    public ArrayList<Airmarshall> searchAirmarshall(String name) {
+        ArrayList<Airmarshall> result = new ArrayList<Airmarshall>();
+
+        for (Airmarshall am : getAirmarshalls()) {
+            if (am.getName().toLowerCase().contains(name.toLowerCase())) {
+                result.add(am);
+            }
+        }
+        return result;
+    }
+    // </editor-fold>
 }

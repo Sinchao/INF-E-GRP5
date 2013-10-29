@@ -7,6 +7,7 @@ import Controller.Controller;
 import Model.Flight;
 import Model.Rank;
 import Model.User;
+import View.AirmarshallView;
 import View.AirportView;
 import View.CountryView;
 import View.FlightView;
@@ -115,7 +116,7 @@ public final class FlyAWayView extends FrameView implements Observer{
         } else if (u.getRank() == Rank.STAFF) {
             //Als user een staff member is(voor rooster)
             JButton[] btnArray = {
-                btnAirport, btnFlight, btnPlane, btnStaff, btnUsers, btnCountry
+                btnAirport, btnFlight, btnPlane, btnStaff, btnUsers, btnCountry, btnAirmarshall
             };
             butonVisible(btnArray, false);
             btnSchedule.setVisible(true);
@@ -190,7 +191,8 @@ public final class FlyAWayView extends FrameView implements Observer{
                         sb.append(String.format(" - Aankomst: %s", flight.getDestination().getName()));
                         sb.append(String.format(" - Piloten: %s", flight.getPilot().getName()));
                         sb.append(String.format(",  %s] ", flight.getCopilot().getName()));
-                        flightsString = String.format("%s %s ", flightsString, sb.toString());
+
+                        flightsString = String.format("%s \n %s ", flightsString, sb.toString());
                     }
                        
                     if (flights.size() < 1) {
@@ -236,6 +238,7 @@ public final class FlyAWayView extends FrameView implements Observer{
         btnUsers = new javax.swing.JButton();
         btnSchedule = new javax.swing.JButton();
         btnCountry = new javax.swing.JButton();
+        btnAirmarshall = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         javax.swing.JMenu fileMenu = new javax.swing.JMenu();
         miLogout = new javax.swing.JMenuItem();
@@ -319,6 +322,14 @@ public final class FlyAWayView extends FrameView implements Observer{
             }
         });
 
+        btnAirmarshall.setText(resourceMap.getString("btnAirmarshall.text")); // NOI18N
+        btnAirmarshall.setName("btnAirmarshall"); // NOI18N
+        btnAirmarshall.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAirmarshallActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -326,19 +337,21 @@ public final class FlyAWayView extends FrameView implements Observer{
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnSchedule, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
-                        .addGap(2, 2, 2))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnAirport, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
-                            .addComponent(btnFlight, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
-                            .addComponent(btnUsers, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
-                            .addComponent(btnPlane, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
-                            .addComponent(btnStaff, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE))
+                            .addComponent(btnAirport, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
+                            .addComponent(btnFlight, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
+                            .addComponent(btnUsers, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
+                            .addComponent(btnPlane, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
+                            .addComponent(btnStaff, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE))
                         .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnCountry, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
+                        .addComponent(btnCountry, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnSchedule, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
+                            .addComponent(btnAirmarshall, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
@@ -353,11 +366,13 @@ public final class FlyAWayView extends FrameView implements Observer{
                 .addComponent(btnFlight)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnUsers)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCountry, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnCountry, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnAirmarshall, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSchedule)
-                .addGap(11, 11, 11))
+                .addContainerGap())
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnAirport, btnFlight, btnPlane, btnStaff});
@@ -369,7 +384,7 @@ public final class FlyAWayView extends FrameView implements Observer{
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 782, Short.MAX_VALUE))
+                .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 772, Short.MAX_VALUE))
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblWelkom, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -384,7 +399,7 @@ public final class FlyAWayView extends FrameView implements Observer{
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(mainPanelLayout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(304, Short.MAX_VALUE))
+                        .addContainerGap())
                     .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 519, Short.MAX_VALUE)))
         );
 
@@ -516,7 +531,13 @@ public final class FlyAWayView extends FrameView implements Observer{
         addFrame(cv);
     }//GEN-LAST:event_btnCountryActionPerformed
 
+    private void btnAirmarshallActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAirmarshallActionPerformed
+        AirmarshallView amv = new AirmarshallView();
+        addFrame(amv);
+    }//GEN-LAST:event_btnAirmarshallActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAirmarshall;
     private javax.swing.JButton btnAirport;
     private javax.swing.JButton btnCountry;
     private javax.swing.JButton btnFlight;
