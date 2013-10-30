@@ -42,6 +42,7 @@ import javax.swing.JOptionPane;
  */
 public class CreateChangeFlightView extends javax.swing.JInternalFrame implements KeyListener {
 
+    private ArrayList messages = new ArrayList();
     private enum FieldEditing {
 
         PILOT, COPILOT, FROM, DESTINATION, PLANE
@@ -353,9 +354,16 @@ public class CreateChangeFlightView extends javax.swing.JInternalFrame implement
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
+                .addGap(30, 30, 30)
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtAirmarshall, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
+                .addGap(157, 157, 157))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblError, javax.swing.GroupLayout.DEFAULT_SIZE, 459, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel5)
                             .addComponent(jLabel4)
@@ -382,17 +390,8 @@ public class CreateChangeFlightView extends javax.swing.JInternalFrame implement
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnCancel)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(51, 51, 51)
-                        .addComponent(lblError, javax.swing.GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtAirmarshall, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
-                .addGap(157, 157, 157))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -434,12 +433,12 @@ public class CreateChangeFlightView extends javax.swing.JInternalFrame implement
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
-                            .addComponent(txtPersonal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtPersonal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtAirmarshall, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10)))
                     .addComponent(jScrollPane1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtAirmarshall, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10))
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSave)
@@ -600,49 +599,83 @@ public class CreateChangeFlightView extends javax.swing.JInternalFrame implement
         if (id < 0) {
             errorMessage += "Please fill in a correct flight id\n";
         }
-
+        
         if (errorMessage.isEmpty()) {
-            if (flight == null) {
-                flight = new Flight();
-                flight.setDate(date);
-                flight.setDestination(destination);
-                flight.setFrom(from);
-                flight.setNumber(id);
+           
+            
+            if(pilot != null && pilot.getPrimaryAirport() != null && pilot.getPrimaryAirport().equals(from) == false) {
+                messages.add("Primary airport of Pilot: " + pilot.getName() + " is not the same as departure airport");
+            }
+            if(coPilot != null && coPilot.getPrimaryAirport() != null && coPilot.getPrimaryAirport().equals(from) == false) {
+                messages.add("Primary airport of Co-Pilot: " + coPilot.getName() + " is not the same as departure airport");
+            }
+            for (Airmarshall m : marshalls) {
+                if(m.getPrimaryAirport() != null && m.getPrimaryAirport().equals(from) == false) {
+                   messages.add("Primary airport of Airmarshall: " + m.getName() + " is not the same as departure airport");
+                } 
+            }
+            for (Staff s : other) {
+                if(s.getPrimaryAirport() != null && s.getPrimaryAirport().equals(from) == false) {
+                    messages.add("Primary airport of Stewardess: " + s.getName() + " is not the same as departure airport");
+                } 
+            }       
+            
+            String errorText = "<html><ul>";
+            for (int i = 0; i < messages.size(); i++) {
+                errorText += "<li>" + messages.get(i) + "</li>";
+                    
+            
+            }
+                errorText += "</ul></html>";
+            
+            int answer = JOptionPane.showConfirmDialog(null, errorText, "Warning", JOptionPane.YES_NO_OPTION);
+            
+            if(answer == JOptionPane.YES_OPTION){ 
+            
+                if (flight == null){
+                    flight = new Flight();
+                    flight.setDate(date);
+                    flight.setDestination(destination);
+                    flight.setFrom(from);
+                    flight.setNumber(id);
+                    flight.setPilot(pilot);
+                    flight.setCopilot(coPilot);
+                    flight.setOtherPersonal(new HashSet<Staff>(other));
+                    flight.setMarshalls(new HashSet<Airmarshall>(marshalls));
+                    flight.setPlane(plane);
+                    flight.setStops(new HashSet<Airport>(stops));
 
-                flight.setPilot(pilot);
-                flight.setCopilot(coPilot);
-                flight.setOtherPersonal(new HashSet<Staff>(other));
-                flight.setMarshalls(new HashSet<Airmarshall>(marshalls));
-                flight.setPlane(plane);
-                flight.setStops(new HashSet<Airport>(stops));
+                    if (Controller.Instance().save(flight)) {
+                        JOptionPane.showMessageDialog(this, "Flight added");
+                        this.dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Unable to add flight");
+                    }
 
-                if (Controller.Instance().save(flight)) {
-                    JOptionPane.showMessageDialog(this, "Flight added");
-                    this.dispose();
                 } else {
-                    JOptionPane.showMessageDialog(this, "Unable to add flight");
-                }
-            } else {
-                Flight newFlight = new Flight();
-                newFlight.setDate(date);
-                newFlight.setDestination(destination);
-                newFlight.setFrom(from);
-                newFlight.setNumber(id);
-                newFlight.setPilot(pilot);
-                newFlight.setMarshalls(new HashSet<Airmarshall>(marshalls));
-                newFlight.setCopilot(coPilot);
-                newFlight.setOtherPersonal(new HashSet<Staff>(other));
-                newFlight.setPlane(plane);
-                newFlight.setStops(new HashSet<Airport>(stops));
+                    Flight newFlight = new Flight();
+                    newFlight.setDate(date);
+                    newFlight.setDestination(destination);
+                    newFlight.setFrom(from);
+                    newFlight.setNumber(id);
+                    newFlight.setPilot(pilot);
+                    newFlight.setMarshalls(new HashSet<Airmarshall>(marshalls));
+                    newFlight.setCopilot(coPilot);
+                    newFlight.setOtherPersonal(new HashSet<Staff>(other));
+                    newFlight.setPlane(plane);
+                    newFlight.setStops(new HashSet<Airport>(stops));
 
-                if (Controller.Instance().update(flight)) {
-                    JOptionPane.showMessageDialog(this, "Flight saved");
-                    this.dispose();
-                } else {
-                    JOptionPane.showMessageDialog(this, "Unable to save flight");
+                    if (Controller.Instance().update(flight)) {
+                        JOptionPane.showMessageDialog(this, "Flight saved");
+                        this.dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Unable to save flight");
+                    }
                 }
             }
-        }
+        
+ }
+            
         lblError.setText(errorMessage);
     }//GEN-LAST:event_btnSaveActionPerformed
 
